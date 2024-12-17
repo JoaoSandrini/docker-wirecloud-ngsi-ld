@@ -12,10 +12,18 @@ ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG SOURCE_BRANCH
 
+# Install Node.js 14.x from Debian archives
+RUN apt-get update && apt-get install -y curl gnupg && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean
+
+
 # Build WireCloud wheel
 RUN git clone -b "${SOURCE_BRANCH}" --depth=1  --single-branch https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}".git && \
-    apt-get update && apt-get install -y gettext && \
+    apt-get update && apt-get install -y gettext curl gnupg && \
     pip install "django<=2.3" && \
+    find "${GITHUB_REPOSITORY}"/src -name "django.po" -exec msgattrib --no-fuzzy --no-obsolete --clear-headers -o {} {} \; && \
     cd "${GITHUB_REPOSITORY}"/src && \
     python setup.py bdist_wheel
 

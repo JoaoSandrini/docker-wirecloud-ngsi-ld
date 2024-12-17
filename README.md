@@ -1,9 +1,8 @@
+# [Docker Hub](https://hub.docker.com/r/joaosnd/wirecloud-ngsi-ld)
+
 # Supported tags and respective `Dockerfile` links #
 
-- [`1.3`, `1.3.1`, `FIWARE_7.7.1`](https://github.com/Wirecloud/docker-wirecloud/blob/master/1.3/Dockerfile)
-- [`1.2`, `latest`](https://github.com/Wirecloud/docker-wirecloud/blob/master/1.2/Dockerfile)
-- [`dev`](https://github.com/Wirecloud/docker-wirecloud/blob/master/dev/Dockerfile)
-
+- [`1.0`, `latest`](https://github.com/JoaoSandrini/docker-wirecloud-ngsi-ld/blob/master/dev/Dockerfile)
 
 # What is WireCloud?
 
@@ -20,7 +19,7 @@ WireCloud is part of [FIWARE](https://www.fiware.org/). Check it out in the [Cat
 # How to use this image
 
 ```
-$ docker run --name some-wirecloud -p 80:8000 -e DEBUG=True -d fiware/wirecloud
+$ docker run --name some-wirecloud -p 80:8000 -e DEBUG=True -d joaosnd/wirecloud-ngsi-ld
 ```
 
 The following environment variables are also honored for configuring your WireCloud instance:
@@ -182,7 +181,7 @@ services:
 
     wirecloud:
         restart: always
-        image: fiware/wirecloud
+        image: joaosnd/wirecloud-ngsi-ld:1.0
         depends_on:
             - postgres
             - elasticsearch
